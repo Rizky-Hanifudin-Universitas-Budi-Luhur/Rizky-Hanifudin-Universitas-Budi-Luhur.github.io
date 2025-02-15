@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal 2 - Hitung Durasi Perjalanan</title>
+    <script>
+        function hitungDurasiPerjalanan() {
+            let jamBerangkat = 8;
+            let menitBerangkat = 52;
+            let detikBerangkat = 45;
+            
+            let jamKedatangan = 12;
+            let menitKedatangan = 15;
+            let detikKedatangan = 10;
+            
+            let totalDetikBerangkat = jamBerangkat * 3600 + menitBerangkat * 60 + detikBerangkat;
+            let totalDetikKedatangan = jamKedatangan * 3600 + menitKedatangan * 60 + detikKedatangan;
+            
+            let selisihDetik = totalDetikKedatangan - totalDetikBerangkat;
+            
+            if (selisihDetik < 0) {
+                selisihDetik += 24 * 3600;
+            }
+            
+            let jamSelisih = Math.floor(selisihDetik / 3600);
+            let menitSelisih = Math.floor((selisihDetik % 3600) / 60);
+            let detikSelisih = (selisihDetik % 3600) % 60;
+            
+            document.getElementById("hasil").innerText = `Durasi Perjalanan: ${jamSelisih} jam, ${menitSelisih} menit, ${detikSelisih} detik`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Hitung Durasi Perjalanan</h2>
+    <button onclick="hitungDurasiPerjalanan()">Hitung</button>
+    <p id="hasil"></p>
+</body>
+</html>
