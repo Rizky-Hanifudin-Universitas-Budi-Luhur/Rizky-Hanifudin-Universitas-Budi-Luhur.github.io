@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soal 1 - Hitung Durasi Perjalanan</title>
     <script>
-        function hitungDurasiPerjalanan() {
+        function hitungWaktuKedatangan() {
             let jamBerangkat = 8;
             let menitBerangkat = 52;
             let detikBerangkat = 45;
             
-            let jamKedatangan = 12;
-            let menitKedatangan = 15;
-            let detikKedatangan = 10;
+            let durasiDetik = 5000;
             
             let totalDetikBerangkat = jamBerangkat * 3600 + menitBerangkat * 60 + detikBerangkat;
-            let totalDetikKedatangan = jamKedatangan * 3600 + menitKedatangan * 60 + detikKedatangan;
+            let totalDetikKedatangan = totalDetikBerangkat + durasiDetik;
             
-            let selisihDetik = totalDetikKedatangan - totalDetikBerangkat;
+            let jamKedatangan = Math.floor((totalDetikKedatangan / 3600) % 24);
+            let menitKedatangan = Math.floor((totalDetikKedatangan % 3600) / 60);
+            let detikKedatangan = (totalDetikKedatangan % 3600) % 60;
             
-            if (selisihDetik < 0) {
-                selisihDetik += 24 * 3600;
-            }
-            
-            let jamSelisih = Math.floor(selisihDetik / 3600);
-            let menitSelisih = Math.floor((selisihDetik % 3600) / 60);
-            let detikSelisih = (selisihDetik % 3600) % 60;
-            
-            document.getElementById("hasil").innerText = `Durasi Perjalanan: ${jamSelisih} jam, ${menitSelisih} menit, ${detikSelisih} detik`;
+            document.getElementById("hasil").innerText = `Waktu Kedatangan: ${jamKedatangan.toString().padStart(2, '0')}:${menitKedatangan.toString().padStart(2, '0')}:${detikKedatangan.toString().padStart(2, '0')}`;
         }
     </script>
 </head>
 <body>
-    <h2>Hitung Durasi Perjalanan</h2>
-    <button onclick="hitungDurasiPerjalanan()">Hitung</button>
+    <h2>Hitung Waktu Kedatangan</h2>
+    <p>Seseorang berangkat pukul 08:52:45 (08 lewat 52 menit 45 detik), dan tiba di tujuan setelah 5000 detik kemudian. Hitung dan cetak pukul berapa (jam:menit:detik) dia tiba di tempat tujuan.</p>
+    <button onclick="hitungWaktuKedatangan()">Hitung</button>
     <p id="hasil"></p>
 </body>
 </html>
