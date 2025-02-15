@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soal 2 - Hitung Durasi Perjalanan</title>
-    <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hitung Durasi Perjalanan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script>
         function hitungDurasiPerjalanan() {
             let jamBerangkat = 8;
@@ -37,10 +32,11 @@
         }
     </script>
 </head>
-<body>
-    <h2>Hitung Durasi Perjalanan</h2>
-    <p>Seseorang berangkat pukul 08:52:45 (08 lewat 52 menit 45 detik), dan tiba di tujuan pukul 12:15:10. Hitung dan cetak berapa jam, berapa menit, dan berapa detik waktu yang dia habiskan dalam perjalanan.</p>
-    <button onclick="hitungDurasiPerjalanan()">Hitung</button>
-    <p id="hasil"></p>
+<body class="container text-center mt-5">
+    <h2 class="mb-4">Soal 2 - Hitung Durasi Perjalanan</h2>
+    <p class="lead">Seseorang berangkat pukul <strong>08:52:45</strong> (08 lewat 52 menit 45 detik), dan tiba di tujuan pukul <strong>12:15:10</strong>. Hitung dan cetak berapa jam, berapa menit, dan berapa detik waktu yang dia habiskan dalam perjalanan.</p>
+    <button class="btn btn-primary mb-3" onclick="hitungDurasiPerjalanan()">Hitung</button>
+    <p id="hasil" class="fs-4 text-success"></p>
+    <a href="https://rizky-hanifudin-universitas-budi-luhur.github.io/Matrikulasi/Perancangan-dan-Analisis-Algoritma/Pertemuan-2/index.html" class="btn btn-secondary">Home</a>
 </body>
 </html>
