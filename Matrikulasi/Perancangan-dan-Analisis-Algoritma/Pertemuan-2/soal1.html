@@ -3,44 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soal 1 - Hitung Durasi Perjalanan</title>
+    <title>Soal 1 - Hitung Waktu Tiba</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script>
-        function hitungDurasiPerjalanan() {
+        function hitungWaktuTiba() {
             let jamBerangkat = 8;
             let menitBerangkat = 52;
             let detikBerangkat = 45;
-            
-            let jamKedatangan = 12;
-            let menitKedatangan = 15;
-            let detikKedatangan = 10;
-            
+            let tambahanDetik = 5000;
+
             let totalDetikBerangkat = jamBerangkat * 3600 + menitBerangkat * 60 + detikBerangkat;
-            let totalDetikKedatangan = jamKedatangan * 3600 + menitKedatangan * 60 + detikKedatangan;
-            
-            let selisihDetik = totalDetikKedatangan - totalDetikBerangkat;
-            
-            if (selisihDetik < 0) {
-                selisihDetik += 24 * 3600;
-            }
-            
-            let jamSelisih = Math.floor(selisihDetik / 3600);
-            let menitSelisih = Math.floor((selisihDetik % 3600) / 60);
-            let detikSelisih = (selisihDetik % 3600) % 60;
-            
-            document.getElementById("hasil").innerText = `Durasi Perjalanan: ${jamSelisih} jam, ${menitSelisih} menit, ${detikSelisih} detik`;
+            let totalDetikTiba = totalDetikBerangkat + tambahanDetik;
+
+            let jamTiba = Math.floor((totalDetikTiba % 86400) / 3600);
+            let menitTiba = Math.floor((totalDetikTiba % 3600) / 60);
+            let detikTiba = totalDetikTiba % 60;
+
+            document.getElementById("hasil").innerText = `Waktu Tiba: ${jamTiba.toString().padStart(2, '0')} : ${menitTiba.toString().padStart(2, '0')} : ${detikTiba.toString().padStart(2, '0')}`;
         }
     </script>
 </head>
 <body class="container text-center mt-5">
-    <h2 class="mb-4">Soal 1 - Hitung Durasi Perjalanan</h2>
-    <p class="lead">Seseorang berangkat pukul 08:52:45 (08 lewat 52 menit 45 detik), dan tiba di tujuan pukul 12:15:10. Hitung dan cetak berapa jam, berapa menit, dan berapa detik waktu yang dia habiskan dalam perjalanan.</p>
-    <div class="text-center">
-        <button class="btn btn-primary mb-3" onclick="hitungDurasiPerjalanan()">Hitung</button>
-    </div>
-    <p id="hasil" class="text-center mt-3"></p>
-    <div class="fs-4 text-success">
-        <a href="https://rizky-hanifudin-universitas-budi-luhur.github.io/Matrikulasi/Perancangan-dan-Analisis-Algoritma/Pertemuan-2/index.html" class="btn btn-secondary">Home</a>
-    </div>
+    <h2 class="mb-4">Soal 1 - Hitung Waktu Tiba</h2>
+    <p class="lead">
+        Seseorang berangkat pukul <strong>08:52:45</strong> (08 lewat 52 menit 45 detik), 
+        dan tiba di tujuan setelah <strong>5000 detik</strong>. 
+        Hitung dan cetak pukul berapa dia tiba di tempat tujuan.
+    </p>
+    <button class="btn btn-primary mb-3" onclick="hitungWaktuTiba()">Hitung</button>
+    <p id="hasil" class="fs-4 text-success"></p>
+    <a href="https://rizky-hanifudin-universitas-budi-luhur.github.io/Matrikulasi/Perancangan-dan-Analisis-Algoritma/Pertemuan-2/index.html" class="btn btn-secondary">Home</a>
 </body>
 </html>
