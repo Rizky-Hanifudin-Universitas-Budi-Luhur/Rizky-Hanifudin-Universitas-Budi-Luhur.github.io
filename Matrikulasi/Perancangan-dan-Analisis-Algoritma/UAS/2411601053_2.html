@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertemuan Ali dan Badu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .track {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #ddd;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .runner {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 30px;
+            background-color: blue;
+            text-align: center;
+            color: white;
+            line-height: 30px;
+            font-weight: bold;
+        }
+        .badu {
+            background-color: red;
+            right: 0;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+    <h2 class="text-center">UAS- Tugas Nomor 2 - Ali dan Badu Berpapasan di Jalan</h2>
+    <h4>Deskripsi Soal 2</h4>
+    <p>Ali bergerak dari titik A ke titik B dengan kecepatan bertambah 0.1 m/s setiap detik. Badu bergerak dari titik B ke titik A dengan kecepatan tetap 3 m/s, berangkat 10 detik setelah Ali. Tentukan kapan dan di mana mereka berpapasan.</p>
+    
+    <h4>Flowchart</h4>
+    <img src="flowchart-2411601053_2.jpg" alt="Flowchart Program" class="img-fluid">
+    
+    <h4>Program Penyelesaian</h4>
+    <button class="btn btn-primary d-block mx-auto" onclick="hitungPertemuan()">Hitung</button>
+    
+    <div class="track">
+        <div class="runner" id="ali">Ali</div>
+    </div>
+    <div class="track">
+        <div class="runner badu" id="badu">Badu</div>
+    </div>
+    
+    <h3 class="text-center mt-4" id="hasil" style="display: none;"></h3>
+    
+    <script>
+        function hitungPertemuan() {
+            let jarakAli = 0, jarakBadu = 1000;
+            let kecepatanAli = 2, kecepatanBadu = 3;
+            let waktu = 0;
+            
+            do {
+                waktu++;
+                jarakAli += kecepatanAli;
+                kecepatanAli += 0.1;
+                
+                if (waktu >= 10) {
+                    jarakBadu -= kecepatanBadu;
+                }
+            } while (jarakAli < jarakBadu);
+            
+            let jarakSetelahPapasan = 1000 - jarakBadu;
+            animateRace(jarakAli, jarakBadu, waktu, jarakSetelahPapasan);
+        }
+        
+        function animateRace(jarakAli, jarakBadu, waktu, jarakSetelahPapasan) {
+            let ali = document.getElementById("ali");
+            let badu = document.getElementById("badu");
+            let hasil = document.getElementById("hasil");
+            let aliPos = 0;
+            let baduPos = 100;
+            let interval = setInterval(() => {
+                aliPos += (jarakAli / 1000) * 5;
+                baduPos -= (jarakBadu / 1000) * 5;
+                
+                ali.style.left = aliPos + "%";
+                badu.style.right = (100 - baduPos) + "%";
+                
+                if (aliPos >= baduPos) {
+                    clearInterval(interval);
+                    hasil.innerText = `Ali dan Badu berpapasan setelah ${waktu} detik di jarak ${jarakSetelahPapasan.toFixed(2)} meter dari titik B.`;
+                    hasil.style.display = "block";
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

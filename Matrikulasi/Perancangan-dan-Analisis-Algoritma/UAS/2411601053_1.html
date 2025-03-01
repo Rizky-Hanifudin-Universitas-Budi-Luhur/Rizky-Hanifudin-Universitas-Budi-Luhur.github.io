@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS- Tugas Nomor 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .track {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #ddd;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .runner {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 30px;
+            background-color: blue;
+            text-align: center;
+            color: white;
+            line-height: 30px;
+            font-weight: bold;
+        }
+        .badu {
+            background-color: red;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+    <h2 class="text-center">UAS- Tugas Nomor 1 - Kapan Badu Mendahului Ali?</h2>
+    <h4>Deskripsi Soal 1</h4>
+    <p>Jarak titik A ke titik B adalah 1000 meter. Ali berangkat dari titik A ke titik B dengan kecepatan awal 2 m/s, yang meningkat setiap 10 detik sebesar 0.1 m/s. Satu menit kemudian, Badu menyusul dengan kecepatan konstan 3 m/s. Tentukan kapan Badu akan mendahului Ali.</p>
+    
+    <h4>Flowchart</h4>
+    <img src="flowchart-2411601053_1.jpg" alt="Flowchart Program" class="img-fluid">
+    
+    <h4>Program Penyelesaian</h4>
+    <button class="btn btn-primary d-block mx-auto" onclick="hitungWaktu()">Hitung</button>
+    
+    <div class="track">
+        <div class="runner" id="ali">Ali</div>
+    </div>
+    <div class="track">
+        <div class="runner badu" id="badu">Badu</div>
+    </div>
+    
+    <h3 class="text-center mt-4" id="hasil" style="display: none;"></h3>
+    
+    <script>
+        function hitungWaktu() {
+            let jarakAli = 0, jarakBadu = 0;
+            let kecepatanAli = 2;
+            let waktuAli = 0;
+            let waktuBadu = 60;
+            const kecepatanBadu = 3;
+            let maxJarak = 1000;
+            
+            do {
+                jarakAli += kecepatanAli * 10;
+                kecepatanAli += 0.1;
+                waktuAli += 10;
+                
+                if (waktuBadu >= 60) {
+                    jarakBadu += kecepatanBadu * 10;
+                    waktuBadu += 10;
+                }
+            } while (jarakBadu <= jarakAli || waktuBadu < waktuAli);
+            
+            let totalDetik = 8 * 3600 + waktuBadu;
+            let jam = Math.floor(totalDetik / 3600);
+            let menit = Math.floor((totalDetik % 3600) / 60);
+            let detik = totalDetik % 60;
+            
+            animateRace(jarakAli, jarakBadu, maxJarak, jam, menit, detik);
+        }
+        
+        function animateRace(jarakAli, jarakBadu, maxJarak, jam, menit, detik) {
+            let ali = document.getElementById("ali");
+            let badu = document.getElementById("badu");
+            let hasil = document.getElementById("hasil");
+            let aliPos = 0;
+            let baduPos = 0;
+            let duration = 5000; // 5 detik
+            let frameRate = 50; // interval animasi
+            let totalFrames = duration / frameRate;
+            let aliStep = (100 / totalFrames) * (jarakAli / maxJarak);
+            let baduStep = (100 / totalFrames) * (jarakBadu / maxJarak);
+            
+            let frame = 0;
+            let interval = setInterval(() => {
+                aliPos += aliStep;
+                baduPos += baduStep;
+                
+                ali.style.left = aliPos + "%";
+                badu.style.left = baduPos + "%";
+                
+                frame++;
+                if (frame >= totalFrames) {
+                    clearInterval(interval);
+                    hasil.innerText = `Badu mendahului Ali pada pukul ${jam.toString().padStart(2, '0')}:${menit.toString().padStart(2, '0')}:${detik.toString().padStart(2, '0')}`;
+                    hasil.style.display = "block";
+                }
+            }, frameRate);
+        }
+    </script>
+</body>
+</html>
